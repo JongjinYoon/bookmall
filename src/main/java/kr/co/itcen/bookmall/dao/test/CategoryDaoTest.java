@@ -8,8 +8,8 @@ import kr.co.itcen.bookmall.vo.CategoryVo;
 public class CategoryDaoTest {
 
 	public static void main(String[] args) {
-		deleteAllTest();
-		insertTest();
+		//deleteAllTest();
+		//insertTest();
 		selectTest();
 		
 

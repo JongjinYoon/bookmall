@@ -10,8 +10,8 @@ public class CartDaoTest {
 
 	public static void main(String[] args) {
 		
-		insertTest();
-		deleteTest();
+		//insertTest();
+		//deleteTest();
 		selectTest();
 	}
 	

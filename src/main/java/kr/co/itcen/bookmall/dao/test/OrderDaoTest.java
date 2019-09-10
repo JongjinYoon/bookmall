@@ -3,6 +3,7 @@ package kr.co.itcen.bookmall.dao.test;
 import java.util.List;
 
 import kr.co.itcen.bookmall.dao.BookDao;
+import kr.co.itcen.bookmall.dao.BookOrderDao;
 import kr.co.itcen.bookmall.dao.OrderDao;
 import kr.co.itcen.bookmall.vo.BookVo;
 import kr.co.itcen.bookmall.vo.OrderVo;
@@ -10,9 +11,15 @@ import kr.co.itcen.bookmall.vo.OrderVo;
 public class OrderDaoTest {
 	public static void main(String[] args) {
 
-		deleteTest();
-		insertTest();
+		//deleteTest();
+		//insertTest();
+		//updateTest();
 		selectTest();
+	}
+
+	private static void updateTest() {
+		new OrderDao().update((long) 1);
+		
 	}
 
 	private static void selectTest() {
@@ -31,12 +38,13 @@ public class OrderDaoTest {
 		
 		OrderVo vo1 = new OrderVo();
 		vo1.setArrival("우리집");
-		dao.insert(vo1,"소설");
+		vo1.setPrice(60000);
+		dao.insert(vo1,"윤종진");
 		
 	}
 
 	private static void deleteTest() {
-		
+		new OrderDao().delete();
 		
 	}
 }

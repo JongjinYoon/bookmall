@@ -2,7 +2,7 @@ package kr.co.itcen.bookmall.vo;
 
 public class OrderVo {
 	private Long no;
-	private Long price;
+	private int price;
 	private String arrival;
 	private Long userNo;
 	@Override
@@ -15,10 +15,10 @@ public class OrderVo {
 	public void setNo(Long no) {
 		this.no = no;
 	}
-	public Long getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(Long price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getArrival() {

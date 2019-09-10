@@ -8,8 +8,8 @@ import kr.co.itcen.bookmall.vo.UserVo;
 public class UserDaoTest {
 
 	public static void main(String[] args) {
-		deleteAllTest();
-		insertTest();
+		//deleteAllTest();
+		//insertTest();
 		selectTest();
 		
 

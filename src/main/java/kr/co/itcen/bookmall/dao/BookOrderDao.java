@@ -8,23 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.co.itcen.bookmall.vo.BookOrderVo;
 import kr.co.itcen.bookmall.vo.BookVo;
-import kr.co.itcen.bookmall.vo.CartVo;
 
-public class CartDao {
-	private Connection getConnection() throws SQLException {
-		Connection connection = null;
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
+public class BookOrderDao {
 
-			String url = "jdbc:mariadb://192.168.1.70:3307/bookmall?characterEncoding=utf8";
-			connection = DriverManager.getConnection(url, "bookmall", "bookmall");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Fail to Loading Driver : " + e);
-		}
-		return connection;
-	}
-	public Boolean insert(String user, String book) {
+	public Boolean insert(BookOrderVo vo1, String book) {
 		Connection connection = null;
 		Boolean result = false;
 		PreparedStatement pstmt = null;
@@ -33,10 +22,12 @@ public class CartDao {
 			connection = getConnection();
 			
 			
-			String sql = "insert into cart values(null,(select no from user where name like ?), (select no from book where title like ?))";
+			String sql = "insert into order_book values((select no from book where title like ?), ?, ?)";
 			pstmt = connection.prepareStatement(sql);
-			pstmt.setString(1, user);
-			pstmt.setString(2, book);
+			pstmt.setString(1, book);
+			pstmt.setLong(2, vo1.getUserNo());
+			pstmt.setLong(3, vo1.getCount());
+			
 			
 			int count = pstmt.executeUpdate();
 			result = (count == 1);
@@ -59,28 +50,42 @@ public class CartDao {
 		return result;
 		
 	}
-
-
-	public List<CartVo> getList() {
+	
+	private Connection getConnection() throws SQLException {
 		Connection connection = null;
-		List<CartVo> result = new ArrayList<CartVo>();
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+
+			String url = "jdbc:mariadb://192.168.1.70:3307/bookmall?characterEncoding=utf8";
+			connection = DriverManager.getConnection(url, "bookmall", "bookmall");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Fail to Loading Driver : " + e);
+		}
+		return connection;
+	}
+
+	public List<BookOrderVo> getList() {
+		Connection connection = null;
+		List<BookOrderVo> result = new ArrayList<BookOrderVo>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			connection = getConnection();
 
-			String sql = "select user_no, book_no from cart where no >=3";
+			String sql = "select no,order_no,count price from order_book order by no asc";
 			pstmt = connection.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				Long userNo = rs.getLong(1);
-				Long bookNo = rs.getLong(2);
+				Long no = rs.getLong(1);
+				Long orderNo = rs.getLong(2);
+				int cnt = rs.getInt(3);
 
-				CartVo vo = new CartVo();
-				vo.setUserNo(userNo);
-				vo.setBookNo(bookNo);
+				BookOrderVo vo = new BookOrderVo();
+				vo.setUserNo(no);
+				vo.setOrderNo(orderNo);
+				vo.setCount(cnt);
 
 				result.add(vo);
 			}
@@ -104,6 +109,7 @@ public class CartDao {
 		}
 		return result;
 	}
+
 	public void delete() {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -112,7 +118,7 @@ public class CartDao {
 
 			connection = getConnection();
 
-			String sql = " delete from cart where no >= 3";
+			String sql = " delete from order_book where no >= 1";
 			pstmt = connection.prepareStatement(sql);
 			pstmt.executeUpdate();
 
