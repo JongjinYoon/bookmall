@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.itcen.bookmall.vo.BookVo;
 import kr.co.itcen.bookmall.vo.CartVo;
 
 public class CartDao {
@@ -69,7 +68,7 @@ public class CartDao {
 		try {
 			connection = getConnection();
 
-			String sql = "select user_no, book_no from cart where no >=3";
+			String sql = "select user_no, book_no from cart";
 			pstmt = connection.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();

@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.itcen.bookmall.vo.CategoryVo;
 import kr.co.itcen.bookmall.vo.UserVo;
 
 public class UserDao {

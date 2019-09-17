@@ -6,7 +6,7 @@ public class BookOrderVo {
 	private int count;
 	@Override
 	public String toString() {
-		return "BookOrderVo [userNo=" + userNo + ", orderNo=" + orderNo + ", count=" + count + "]";
+		return "BookOrderVo [bookNo=" + userNo + ", orderNo=" + orderNo + ", count=" + count + "]";
 	}
 	public Long getUserNo() {
 		return userNo;

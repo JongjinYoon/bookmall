@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.itcen.bookmall.vo.BookOrderVo;
-import kr.co.itcen.bookmall.vo.BookVo;
 
 public class BookOrderDao {
 
@@ -72,7 +71,7 @@ public class BookOrderDao {
 		try {
 			connection = getConnection();
 
-			String sql = "select no,order_no,count price from order_book order by no asc";
+			String sql = "select no,order_no,count from order_book order by no asc";
 			pstmt = connection.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();

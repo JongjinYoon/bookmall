@@ -7,7 +7,7 @@ public class OrderVo {
 	private Long userNo;
 	@Override
 	public String toString() {
-		return "OrderVo [no=" + no + ", price=" + price + ", arrival=" + arrival + ", userNo=" + userNo + "]";
+		return "OrderVo [ 번호 : " + no + " price : " + price + ", arrival : " + arrival + ", userNo : " + userNo + "]";
 	}
 	public Long getNo() {
 		return no;

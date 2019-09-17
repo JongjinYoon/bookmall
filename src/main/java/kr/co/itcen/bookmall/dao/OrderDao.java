@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.itcen.bookmall.vo.BookVo;
 import kr.co.itcen.bookmall.vo.OrderVo;
 
 public class OrderDao {
@@ -70,17 +69,19 @@ public class OrderDao {
 		try {
 			connection = getConnection();
 
-			String sql = "select user_no, price, arrival from `order`";
+			String sql = "select no,user_no, price, arrival from `order`";
 			pstmt = connection.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				Long userNo = rs.getLong(1);
-				int price = rs.getInt(2);
-				String arrival = rs.getString(3);
+				Long no = rs.getLong(1);
+				Long userNo = rs.getLong(2);
+				int price = rs.getInt(3);
+				String arrival = rs.getString(4);
 
 				OrderVo vo = new OrderVo();
+				vo.setNo(no);
 				vo.setUserNo(userNo);
 				vo.setPrice(price);
 				vo.setArrival(arrival);
